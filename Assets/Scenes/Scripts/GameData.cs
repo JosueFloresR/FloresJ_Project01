@@ -2,65 +2,66 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Singleton Object to store all GameData
-/// Is not destroyed when changing scenes
-/// </summary>
 public class GameData : MonoBehaviour
 {
-    public static GameData instanceRef; //null //variable that can point to a GameData object
+    public static GameData instanceRef;  //null    singleton global variable
 
     private int score;
     private int health;
 
-    //TODO - Add properties: Score, Health
+    public int Score   //PROPERTY
+    {
+        get { return score; } //read Only Access
+    }
 
-    // Awake is called before Start() is called on any GameObject
-    // Other objects have dependencies on this object so it must be created first
+    public int Health
+    {
+        get { return health; }  ///readOnly access
+
+    }
+
+    //TODO Add Properties for Score, Health
+
     void Awake()
     {
-        if (instanceRef == null)  //this code hasn't been executed before
+        if (instanceRef == null)
         {
-            instanceRef = this; //point to object instance currently executing this code
-            DontDestroyOnLoad(this.gameObject); //don't destroy the gameObject this is attached to
+            instanceRef = this;   //the object currently executing the code
+            DontDestroyOnLoad(this.gameObject);
         }
-        else  //this object is not the first, it's an imposter that must be destroyed
+        else
         {
             DestroyImmediate(this.gameObject);
-            Debug.Log("Destroy GameData Imposter");
+            Debug.Log(" Destroyed GameData Imposter ");
         }
 
-        //initialize after destroying imposters
         score = 0;
         health = 100;
 
 
-    } //end Awake
+    } //end of awake
 
-    //will be executed in PlayerController when colliding with a collectible
+    //Increases Score, called in PlayerController
     public void Add(int value)
     {
         score += value;
-        Debug.Log("Score updated: " + score); //display score in console
+        Debug.Log("Score updated " + score);
     }
 
     public void TakeDamage(int value)
     {
-        health -= value;
-        Debug.Log("health updated: " + health); //display health in console
+        health -= value; //subtract points from health
+        Debug.Log("Health updated " + health);
         if (health <= 0)
         {
-            Debug.Log("Health less than 0"); //display health in console
-
+            Debug.Log("Health is ZERO gameOver ");
         }
     }
 
-    //called when restarting the miniGame
     public void ResetGameData()
     {
         score = 0;
         health = 100;
     }
 
-
-}//end class GameData
+}// end of GameData
