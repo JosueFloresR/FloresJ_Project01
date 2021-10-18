@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿//Josue Flores
+//V4 Score
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    //V4 Score
     public enum HeroState { idle, walk, jump }  //create custom data-type - have integer values
 
     public HeroState currentHeroState;  //will display the current enum 
@@ -29,10 +30,10 @@ public class PlayerController : MonoBehaviour
         animator.SetInteger("HeroState", (int)HeroState.idle);  //send in the signal: 0
         facingRight = true;
         myRBody2D = GetComponent<Rigidbody2D>();
-        forceX = 100.0f;  //force value may need adjusted
+        forceX = 180.0f;  //force value may need adjusted
 
         groundCheckRadius = 0.2f; //may need modified
-        jumpForce = 10f; //may need modified
+        jumpForce = 8f; //may need modified
     }
 
     // Update is called once per frame

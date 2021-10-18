@@ -1,5 +1,6 @@
-﻿using UnityEngine;
-using UnityEngine.UI; //make sure to add this
+﻿//Josue Flores
+using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public static class Utility
@@ -19,4 +20,4 @@ public static class Utility
         cg.interactable = false;
     }
 
-} //end Utility.cs
+}
