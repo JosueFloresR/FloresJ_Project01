@@ -25,20 +25,24 @@ public class MiniGameManager : MonoBehaviour
     CanvasGroup resultsPanelCG; //canvas group component on the ResultsPanel
 
     [SerializeField]
+    CanvasGroup OptionsPanelCG; //OptionsPanel
+
+    [SerializeField]
     int winScore = 30;
 
 
     // Start is called before the first frame update
-    void Start()
+     public void Start()
     {
         curGameState = MiniGameState.idle;
         Utility.ShowCG(resultsPanelCG); //make sure panel is visible
+        Utility.HideCG(OptionsPanelCG);
         resultsText.text = "Score " + winScore + " To Win";
         startButton.onClick.AddListener(ReStartGame);
     }
 
     // Update is called once per frame
-    void Update()
+     public void Update()
     {
         if (curGameState == MiniGameState.active)
         {
@@ -48,8 +52,8 @@ public class MiniGameManager : MonoBehaviour
                 {
                     //won the game
                     curGameState = MiniGameState.win;
+                    GameWin();
                     resultsText.text = "You are a winner";
-                    GameOver();
                 }
             }
             else  //lost due to health
@@ -82,10 +86,20 @@ public class MiniGameManager : MonoBehaviour
     /// Games the over.
     /// Private since only executed from within this class
     /// </summary>
-    private void GameOver()
+    /// void GameWin()
+    public void GameWin()
+    {
+        Utility.ShowCG(OptionsPanelCG);
+        Utility.ShowCG(resultsPanelCG);
+        Text btnTxt = startButton.GetComponentInChildren<Text>();
+    btnTxt.text = "Play Again";
+        spawner.activeSpawning = false;
+        spawner.DestroySpawnedObjects();
+
+    }
+private void GameOver()
     {
         Utility.ShowCG(resultsPanelCG); //toggle to make visible
-
         ///TODO stop spawner, destroy all spawned objects
         spawner.StopAllSpawning();
 

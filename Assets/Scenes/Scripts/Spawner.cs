@@ -86,7 +86,7 @@ public class Spawner : MonoBehaviour
     }
 
     //Exectued in StopAllSpawning
-    private void DestroySpawnedObjects()
+    public void DestroySpawnedObjects()
     {
         PickUp[] items = FindObjectsOfType<PickUp>();
         foreach (PickUp item in items)
